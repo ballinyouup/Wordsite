@@ -13,7 +13,7 @@ const useButtonStates = (): IButtonReturn => {
 			return [...prevButtonStates, true];
 		});
 	};
-
+	
 	const toggleButtonState = (index: number) => {
 		setButtonStates((prevButtonStates: boolean[]) => {
 			const newState = [...prevButtonStates];

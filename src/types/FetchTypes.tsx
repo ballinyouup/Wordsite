@@ -13,3 +13,5 @@ export interface IData {
   phonetics: Phonetics[];
   meanings: Meanings[];
 }
+
+

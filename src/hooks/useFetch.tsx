@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { IData } from "../types/FetchTypes";
 import { useRouter } from "next/router";
 
@@ -29,7 +29,7 @@ const useFetch = (): IFetchReturn => {
 		try {
 			if (word !== "") {
 				setIsLoading(true); // set isLoading to true when the request is sent
-				const response = await axios.get(
+				const response: AxiosResponse<IData[]> = await axios.get(
 					`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
 				);
 				setData(response.data[0]);

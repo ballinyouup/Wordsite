@@ -23,15 +23,15 @@ const useSearch = (): ISearchReturn => {
 	//Sets query to the value of the input with a timeout to display results
 	const handleInput = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const trimmedQuery: string = event.target.value.trim();
-			setQuery(trimmedQuery);
+			const input: string = event.target.value;
+			setQuery(input);
 
-			if (trimmedQuery.length >= 2) {
+			if (input.length >= 2) {
 				clearTimeout(timeout);
 				timeout = setTimeout(() => {
 					const keys = Object.keys(words);
 					const matchingWords = keys.filter((key: string) => {
-						const regex = new RegExp(`^${trimmedQuery}`, "i");
+						const regex = new RegExp(`^${input}`, "i");
 						return regex.test(key);
 					});
 					setMatching(matchingWords);
