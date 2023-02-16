@@ -1,46 +1,51 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { IData } from '../types/FetchTypes';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { IData } from "../types/FetchTypes";
+import { useRouter } from "next/router";
 
-const useFetch = () => {
-  //Creates data variable of Interface IData or null and is set a default state of null.
-  const [data, setData] = useState<IData | null>(null);
+interface IFetchReturn {
+	data: IData | null;
+	word: string | string[] | undefined;
+	isLoading: boolean;
+}
 
-  //Store return from next's useRouter hook inside router.
-  const router = useRouter();
+const useFetch = (): IFetchReturn => {
+	//Creates data variable of Interface IData or null and is set a default state of null.
+	const [data, setData] = useState<IData | null>(null);
 
-  //Destructures page object from router.query.
-  const { word } = router.query;
+	//Store return from next's useRouter hook inside router.
+	const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  /*
+	//Destructures page object from router.query.
+	const { word } = router.query;
+
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	/*
   Fetches data with useEffect hook asynchronously with a try catch for errors and
   runs whenever word changes as a dependency array.
   Returns the data object and word.
   */
-  const fetchData = async () => {
-    try {
-      if (word !== '') {
-        setIsLoading(true); // set isLoading to true when the request is sent
-        const response = await axios.get(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-        );
-        setData(response.data[0]);
-      }
-    } catch (error) {
-      console.log(error);
-      router.push('/notfound');
-    } finally {
-      // set isLoading to false when the response is received.
-      setTimeout(() => setIsLoading(false), 2000);
-    }
-  };
+	const fetchData = async () => {
+		try {
+			if (word !== "") {
+				setIsLoading(true); // set isLoading to true when the request is sent
+				const response = await axios.get(
+					`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+				);
+				setData(response.data[0]);
+			}
+		} catch (error) {
+			router.push("/notfound");
+		} finally {
+			// set isLoading to false when the response is received.
+			setTimeout(() => setIsLoading(false), 2000);
+		}
+	};
 
-  useEffect(() => {
-    fetchData();
-  }, [word]);
-  return { data, word, isLoading };
+	useEffect(() => {
+		fetchData();
+	}, [word]);
+	return { data, word, isLoading };
 };
 
 export default useFetch;

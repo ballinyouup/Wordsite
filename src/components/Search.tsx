@@ -1,7 +1,7 @@
 import { FC } from "react"
 import useSearch from "../hooks/useSearch"
 import styles from "../styles/Search.module.css"
-const Search: FC = () => {
+const Search: FC = ():JSX.Element => {
 	const {
 		query,
 		handleInput,

@@ -4,7 +4,7 @@ import useButtonStates from "../hooks/useButtonStates"
 import { Meanings, Definition } from "../types/FetchTypes"
 import styles from "../styles/WordMeanings.module.css"
 
-const WordPhonetics: FC = () => {
+const WordPhonetics: FC = ():JSX.Element => {
 	const { data } = useFetch()
 	const { addNewButtonState, buttonStates, toggleButtonState } =
 		useButtonStates()

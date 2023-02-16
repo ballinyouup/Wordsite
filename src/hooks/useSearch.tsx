@@ -1,47 +1,57 @@
-import { useRouter } from "next/router"
-import React, { useCallback, useState } from "react"
-import words from "words.json"
+import { useRouter } from "next/router";
+import React, { useCallback, useState } from "react";
+import words from "words.json";
 
-const useSearch = () => {
+interface ISearchReturn {
+	query: string;
+	setQuery: React.Dispatch<React.SetStateAction<string>>;
+	handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+	handleClick: () => void;
+	matching: string[];
+	handleMatchingClick: (result: string) => void;
+}
+
+const useSearch = (): ISearchReturn => {
 	//Creates new query state for search string.
-	const [query, setQuery] = useState<string>("")
-	const [matching, setMatching] = useState<string[]>([])
+	const [query, setQuery] = useState<string>("");
+	const [matching, setMatching] = useState<string[]>([]);
 	//Creates a new router from next's useRouter hook.
-	const router = useRouter()
+	const router = useRouter();
 
-	let timeout: NodeJS.Timeout
+	let timeout: NodeJS.Timeout;
 	//Sets query to the value of the input with a timeout to display results
 	const handleInput = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const trimmedQuery: string = event.target.value.trim()
-			setQuery(trimmedQuery)
+			const trimmedQuery: string = event.target.value.trim();
+			setQuery(trimmedQuery);
 
 			if (trimmedQuery.length >= 2) {
-				clearTimeout(timeout)
+				clearTimeout(timeout);
 				timeout = setTimeout(() => {
-					const keys = Object.keys(words)
+					const keys = Object.keys(words);
 					const matchingWords = keys.filter((key: string) => {
-						const regex = new RegExp(`^${trimmedQuery}`, "i")
-						return regex.test(key)
-					})
-					setMatching(matchingWords)
-				}, 300)
+						const regex = new RegExp(`^${trimmedQuery}`, "i");
+						return regex.test(key);
+					});
+					setMatching(matchingWords);
+				}, 300);
 			} else {
-				setMatching([])
+				setMatching([]);
 			}
 		},
 		[]
-	)
+	);
 
 	//Runs handleSearch on Enter
 	function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 		if (event.key === "Enter") {
-			handleSearch()
+			handleSearch();
 		}
 	}
 	//Runs handleSearch on click of search icon button.
 	function handleClick() {
-		handleSearch()
+		handleSearch();
 	}
 
 	/*
@@ -50,13 +60,13 @@ const useSearch = () => {
   Resets query, and value of input.
   */
 	function handleSearch() {
-		router.push(`/${query}`)
-		setQuery("")
+		router.push(`/${query}`);
+		setQuery("");
 	}
 
 	function handleMatchingClick(result: string) {
-		router.push(`/${result}`)
-		setQuery("")
+		router.push(`/${result}`);
+		setQuery("");
 	}
 
 	//Returns the objects below to be used in components.
@@ -68,7 +78,7 @@ const useSearch = () => {
 		handleClick,
 		matching,
 		handleMatchingClick,
-	}
-}
+	};
+};
 
-export default useSearch
+export default useSearch;
