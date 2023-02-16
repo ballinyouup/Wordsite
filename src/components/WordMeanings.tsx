@@ -1,8 +1,8 @@
 import { FC } from "react"
-import useFetch from "../hooks/useFetch"
-import useButtonStates from "../hooks/useButtonStates"
-import { Meanings, Definition } from "../types/FetchTypes"
-import styles from "../styles/WordMeanings.module.css"
+import useFetch from "@/hooks/useFetch"
+import useButtonStates from "@/hooks/useButtonStates"
+import { Meanings, Definition } from "@/types/FetchTypes"
+import styles from "@/styles/WordMeanings.module.css"
 
 const WordPhonetics: FC = ():JSX.Element => {
 	const { data } = useFetch()

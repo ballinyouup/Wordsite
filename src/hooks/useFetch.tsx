@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { IData } from "../types/FetchTypes";
+import { IData } from "@/types/FetchTypes";
 import { useRouter } from "next/router";
 
 interface IFetchReturn {

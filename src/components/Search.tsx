@@ -1,6 +1,6 @@
 import { FC } from "react"
-import useSearch from "../hooks/useSearch"
-import styles from "../styles/Search.module.css"
+import useSearch from "@/hooks/useSearch"
+import styles from "@/styles/Search.module.css"
 const Search: FC = ():JSX.Element => {
 	const {
 		query,
@@ -10,6 +10,7 @@ const Search: FC = ():JSX.Element => {
 		matching,
 		handleMatchingClick,
 	} = useSearch()
+
 	return (
 		<div className={styles.searchContainer}>
 			<input

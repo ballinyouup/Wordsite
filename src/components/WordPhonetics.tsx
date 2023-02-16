@@ -1,6 +1,6 @@
 import { FC } from "react";
-import useFetch from "../hooks/useFetch";
-import { Phonetics } from "../types/FetchTypes";
+import useFetch from "@/hooks/useFetch";
+import { Phonetics } from "@/types/FetchTypes";
 
 const WordPhonetics: FC = (): JSX.Element => {
 	const { data } = useFetch();
