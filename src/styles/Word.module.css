@@ -1,0 +1,13 @@
+.content {
+  width: 75%;
+  margin: auto;
+  text-align: left;
+}
+
+.content h3 {
+  text-transform: capitalize;
+}
+
+.content h1 {
+  text-transform: capitalize;
+}
