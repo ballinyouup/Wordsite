@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import words from "words.json";
 
 interface ISearchReturn {

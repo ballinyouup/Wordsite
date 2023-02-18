@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { IData } from "@/types/FetchTypes";
 import { useRouter } from "next/router";
 
-interface IFetchReturn {
+export interface IFetchReturn {
 	data: IData | null;
 	word: string | string[] | undefined;
 	isLoading: boolean;
@@ -29,7 +29,7 @@ const useFetch = (): IFetchReturn => {
 		try {
 			if (word !== "") {
 				setIsLoading(true); // set isLoading to true when the request is sent
-				const response: AxiosResponse<IData[]> = await axios.get(
+				const response: AxiosResponse<IData[], IData[]> = await axios.get(
 					`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
 				);
 				setData(response.data[0]);

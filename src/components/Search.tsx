@@ -1,15 +1,34 @@
-import { FC } from "react"
-import useSearch from "@/hooks/useSearch"
-import styles from "@/styles/Search.module.css"
-const Search: FC = ():JSX.Element => {
+import { FC, useRef, useEffect } from "react";
+import useSearch from "@/hooks/useSearch";
+import styles from "@/styles/Search.module.css";
+
+const Search: FC = (): JSX.Element => {
 	const {
 		query,
+		setQuery,
 		handleInput,
 		handleKeyDown,
 		handleClick,
 		matching,
 		handleMatchingClick,
-	} = useSearch()
+	} = useSearch();
+
+	const resultContainerRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const handleDocumentClick = (event: MouseEvent) => {
+			if (
+				resultContainerRef.current &&
+				!resultContainerRef.current.contains(event.target as Node)
+			) {
+				setQuery("");
+			}
+		};
+		document.addEventListener("click", handleDocumentClick);
+		return () => {
+			document.removeEventListener("click", handleDocumentClick);
+		};
+	}, []);
 
 	return (
 		<div className={styles.searchContainer}>
@@ -20,8 +39,8 @@ const Search: FC = ():JSX.Element => {
 				placeholder="Enter word for definition.."
 				value={query}
 			/>
-			<div className={styles.resultContainer}>
-				{query != ""
+			<div className={styles.resultContainer} ref={resultContainerRef}>
+				{query !== ""
 					? matching.slice(0, 10).map((result: string, index: number) => (
 							<button
 								onClick={() => handleMatchingClick(result)}
@@ -40,7 +59,7 @@ const Search: FC = ():JSX.Element => {
 				/>
 			</button>
 		</div>
-	)
-}
+	);
+};
 
-export default Search
+export default Search;

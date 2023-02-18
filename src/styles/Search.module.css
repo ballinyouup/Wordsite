@@ -53,20 +53,31 @@
   top: 160px;
   margin-right: 40px;
   background-color: white;
-
   width: 400px;
-  height: auto;
-}
-.result {
   border-radius: 12px;
   border: 1px solid gray;
+}
+
+.resultContainer:empty {
+  display: none;
+}
+
+.result {
   padding: 12px 20px;
   cursor: pointer;
   font-size: large;
   text-align: left;
+  border: none;
+}
+
+.result:first-child {
+  border-radius: 12px 12px 0px 0px;
+}
+
+.result:last-child {
+  border-radius: 0px 0px 12px 12px;
 }
 
 .result:hover {
-  border-radius: 12px;
   background-color: bisque;
 }
