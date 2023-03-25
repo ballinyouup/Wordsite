@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-interface IButtonReturn {
+interface ButtonReturn {
 	buttonStates: boolean[];
 	toggleButtonState: (index: number) => void;
 	addNewButtonState: () => void;
 }
 
-const useButtonStates = (): IButtonReturn => {
+const useButtonStates = (): ButtonReturn => {
 	const [buttonStates, setButtonStates] = useState<boolean[]>([]);
 	const addNewButtonState = (): void => {
 		setButtonStates((prevButtonStates: boolean[]) => {

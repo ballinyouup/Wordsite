@@ -36,7 +36,7 @@ const Search: FC = (): JSX.Element => {
 				className={styles.search}
 				onChange={handleInput}
 				onKeyDown={handleKeyDown}
-				placeholder="Enter word for definition.."
+				placeholder="Search..."
 				value={query}
 			/>
 			<div className={styles.resultContainer} ref={resultContainerRef}>

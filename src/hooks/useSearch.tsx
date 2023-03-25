@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import words from "words.json";
 
 interface ISearchReturn {
@@ -51,7 +51,9 @@ const useSearch = (): ISearchReturn => {
 	}
 	//Runs handleSearch on click of search icon button.
 	function handleClick() {
-		handleSearch();
+		if (query !== "") {
+			handleSearch();
+		}
 	}
 
 	/*
@@ -60,12 +62,12 @@ const useSearch = (): ISearchReturn => {
   Resets query, and value of input.
   */
 	function handleSearch() {
-		router.push(`/${query}`);
+		router.push(`/word/${query}`);
 		setQuery("");
 	}
 
 	function handleMatchingClick(result: string) {
-		router.push(`/${result}`);
+		router.push(`/word/${result}`);
 		setQuery("");
 	}
 

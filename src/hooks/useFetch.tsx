@@ -35,7 +35,7 @@ const useFetch = (): IFetchReturn => {
 				setData(response.data[0]);
 			}
 		} catch (error) {
-			router.push("/notfound");
+			router.push("/word/notfound");
 		} finally {
 			// set isLoading to false when the response is received.
 			setTimeout(() => setIsLoading(false), 2000);
